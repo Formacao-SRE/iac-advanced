@@ -1,0 +1,13 @@
+---
+- name: Instalar e Configurar Wordpress em EC2 e RDS  
+  hosts: tag_Webserver_true
+  vars:
+    ansible_user: ubuntu
+    ansible_ssh_private_key_file: "~/access_keys/lazevedo-elvenworks.pem"
+  become: yes
+
+  roles:
+    - common
+    - webserver
+    - wordpress
+

@@ -1,0 +1,7 @@
+---
+  - name: Install basic packages
+    package:
+      name: "{{ packages }}"
+      state: latest
+      update_cache: yes
+    ignore_errors:  true

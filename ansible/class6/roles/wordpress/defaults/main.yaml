@@ -1,0 +1,6 @@
+---
+packages:
+    - mypy
+    - mysql-client
+    - python3-mypy
+    - python3-mysqldb

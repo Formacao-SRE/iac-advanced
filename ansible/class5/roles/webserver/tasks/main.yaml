@@ -1,0 +1,24 @@
+---
+  - name: Install basic packages
+    apt:
+      name: "{{ packages }}"
+      state: latest
+      update_cache: yes
+    ignore_errors:  true
+
+  - name: Starta o Nginx e o habilita no Startup
+    service:
+      name: nginx
+      state: started
+      enabled: yes
+
+  
+  - name: Atualiza o site com meu index.html
+    copy:
+      dest: "{{ index_path }}"
+      group: root
+      owner: root
+      mode: "0644"
+      src: files/index.html
+    notify:
+    - Restart Nginx

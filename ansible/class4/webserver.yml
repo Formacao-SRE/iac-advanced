@@ -1,0 +1,39 @@
+---
+- name: Instalar WebServer na Ec2 com Ubuntu
+  hosts: webserver
+  become: yes
+
+  tasks:
+  - name: Instala o Nginx
+    apt:
+      name: nginx
+      state: latest
+      update_cache: yes
+
+  - name: Instala o Php
+    apt:
+      name: php
+      state: latest
+      update_cache: yes
+  
+  - name: Starta o Nginx e o habilita no Startup
+    service:
+      name: nginx
+      state: started
+      enabled: yes
+
+  - name: Atualiza o site com meu index.html
+    copy:
+      dest: /var/www/html/
+      group: root
+      owner: root
+      mode: "0644"
+      src: mysite/index.html
+    notify:
+    - Restart Nginx
+
+  handlers:
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted

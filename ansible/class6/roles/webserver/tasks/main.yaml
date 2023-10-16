@@ -1,0 +1,19 @@
+---
+  - name: Install basic packages
+    apt:
+      name: "{{ packages }}"
+      state: latest
+      update_cache: yes
+    ignore_errors:  true
+
+  - name: Starta o Nginx e o habilita no Startup
+    service:
+      name: nginx
+      state: started
+      enabled: yes
+  
+  - name: Starta o Php-fpm e o habilita no Startup
+    service:
+      name: php8.1-fpm
+      state: started
+      enabled: yes
